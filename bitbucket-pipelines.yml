@@ -1,0 +1,15 @@
+image: node:16
+
+pipelines:
+  default:
+    - step:
+        name: Install, typecheck and lint
+        caches:
+          - npm
+        script:
+          - npm ci --ignore-scripts --no-audit # see https://docs.npmjs.com/cli/v8/commands/npm-ci
+          - npm run typecheck
+          - npm run lint
+definitions:
+  caches:
+    npm: $HOME/.npm
